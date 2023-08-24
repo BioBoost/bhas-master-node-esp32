@@ -33,8 +33,8 @@ namespace BHAS::Communication::Encoders {
       static Message can_message_to_message(const twai_message_t& canMessage) {
         Message message;
         
-        message.source_id(canMessage.identifier);
-        message.destination_id(canMessage.data[0]);
+        message.source_id(canMessage.data[0]);
+        message.destination_id(canMessage.identifier);
         message.entity_id(canMessage.data[1]);
         message.base_type(static_cast<Message::BaseType>((canMessage.data[2] >> 4) & 0x0F));
         message.sub_type(canMessage.data[2] & 0x0F);

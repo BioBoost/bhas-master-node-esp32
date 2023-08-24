@@ -5,6 +5,7 @@
 #include "../communication/message.h"
 #include "../logging/message_logger.h"
 #include "../communication/channels/channel.h"
+#include "node_manager.h"
 
 namespace BHAS::Nodes {
 
@@ -36,6 +37,7 @@ namespace BHAS::Nodes {
       uint8_t _id = 0;
       Communication::Channel& _channel;
       Logging::MessageLogger _messageLogger;
+      NodeManager _nodes;
   };
 
 };

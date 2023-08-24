@@ -32,7 +32,7 @@ namespace BHAS::Communication::Channels {
 
   bool CANChannel::send(Message& message) {
     twai_message_t canMessage = Encoders::CANEncoder::message_to_can_message(message);
-    esp_err_t result = twai_transmit(&canMessage, pdMS_TO_TICKS(1000));
+    esp_err_t result = twai_transmit(&canMessage, pdMS_TO_TICKS(100));
 
     // TODO: Check result + what if fails ? Do we create internal buffer for messages that need to be send ?
   

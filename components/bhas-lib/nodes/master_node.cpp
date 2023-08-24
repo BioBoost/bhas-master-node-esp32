@@ -1,5 +1,6 @@
 #include "master_node.h"
 #include <stdio.h>
+#include "base_node.h"
 
 namespace BHAS::Nodes {
 
@@ -31,11 +32,17 @@ namespace BHAS::Nodes {
   }
 
   void MasterNode::handle_received_message(Communication::Message& message) {
-    if (message.destination_id() != id() && message.destination_id() != MasterNode::BROADCAST_ID) {
-      return;
-    }
+    BaseNode node(message.source_id());
+    _nodes.add_or_update_node(node);
 
-    printf("Received a CAN message\n");
+    printf("Currently registered nodes:\n");
+    printf("---------------------------\n");
+    printf("%s", _nodes.to_string().c_str());
+    printf("---------------------------\n");
+
+    // if (message.destination_id() != id() && message.destination_id() != MasterNode::BROADCAST_ID) {
+    //   return;
+    // }
   }
 
   void MasterNode::handle_send_message(Communication::Message& message) {
